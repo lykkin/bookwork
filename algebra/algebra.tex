@@ -119,7 +119,7 @@
 		largest power of $p$ that divides into $n$, we sum up all these terms: $\sum\limits_{i \in \mathbb{N}}\floor*{\frac{n}{p^i}}$
 	\subsection*{0.2.9}
 		Haskell implementation\\
-		$linearGCD :: Int -> Int -> (Int, Int, Int)\\
+		$linearGCD :: Integer -> Integer -> (Integer, Integer, Integer)\\
 		linearGCD\ a\ b = (d, u, v)\ where\\
 		    \indent (d, x, y) = eGCD\ 0\ 1\ 1\ 0\ (abs\ a)\ (abs\ b)\\
 		    \indent u\ |\ a < 0     = negate\ x\\
@@ -135,7 +135,7 @@
 		Let $p$ be a prime larger than $N+1$ such that $\varphi(p^k) = (p-1)(p^{k-1}) > N$.  Therefore any prime $q$ dividing $n$ is no larger than $N+1$ and there are only
 		finitely many choices for this $q$. Furthermore, we know $\varphi(n) = \varphi(q^k)\varphi(m)$ for some number $m$ that is not divisible by $q$.  Note that $\varphi(m)$ is 
 		constant, so this equation relies on $k$.  This limits $k \leq log_q(\frac{N}{m})$.  Now we see that both the choice for $q$ and $k$ are of a finite set, thus there are finitely
-		many numbers such that $\varphi(n) = N$.\\
+		many numbers such that $\varphi(n) = N$.\\ 
 		\\
 		Let's say there is some number $M$ such that $\varphi(n) < M \forall n \in \mathbb{N}$.  Since we are mapping an infinite set, $\mathbb{N}$, onto a finite set, we are bound to
 		break the finite ceiling we set in the last previous portion (i.e. at least one of the numbers from $1\dots M$ will have an infinite amount of numbers mapped to it).  Thus we
@@ -151,21 +151,57 @@
 		\overline{10},\overline{11},\overline{12},\overline{13},\overline{14},\overline{15},\overline{16},\overline{17}$\}\\
 		Where $\overline a = \{ x \in \mathbb{Z} | x = 18k + a  \}$
 	\subsection*{0.3.2}
-		
+		For some $a \in \mathbb{Z}$, we have $a = qn + r \implies a \equiv r\ (mod\ n) \implies \overline{a} = \overline{r}$  Since $ 0\leq r < n$, $\overline{a} \in \mathbb{Z}/n\mathbb{Z}$; if we take $0 \leq a,b < n$ where $a \centernot = b$ and $a-b > 0 \implies n \centernot | a-b \implies \overline{a} \centernot = \overline{b}$ thus the residue classes are distinct.
 	\subsection*{0.3.3}
+		First, note that $10 \equiv 1\ (mod\ 9)$ so $10^n \equiv 1^n\ (mod\ 9)$.\\
+		  Now we have $a \equiv \overline{a_n10^{n} + a_{n-1}10^{n-1} + \dots + a_0} \equiv \overline{a_n10^n} + \dots + \overline{a_0} \equiv \overline{a_n}\overline{10^n} + \dots + \overline{a_0} \equiv \overline{a_n} + \dots + \overline{a_0}\ (mod\ 9)$
 	\subsection*{0.3.4}
+		$37 \equiv 8\ (mod\ 29); 8^2 \equiv 6\ (mod\ 29); 8^4 \equiv 7\ (mod\ 29); 8^8 \equiv 20\ (mod\ 29);$\\
+		$ 8^{16} \equiv 23\ (mod\ 29); 8^{32} \equiv 7\ (mod\ 29); 8^{64} \equiv 20\ (mod\ 29)$\\
+		$8^{100} = 8^{64}8^{32}8^4 \equiv 20*7*7\ (mod\ 29) \equiv 23\ (mod\ 29)$
 	\subsection*{0.3.5}
+		$9^5 \equiv 49\ (mod\ 100); 9^{10} \equiv 1\ (mod\ 100); (9^{10})^{150} \equiv (1)^{150} \equiv 1\ (mod\ 100)$
 	\subsection*{0.3.6}
+		$0*0 \equiv 0\ (mod\ 4);1*1 \equiv 1\ (mod\ 4); 2*2 \equiv 0\ (mod\ 4); 3*3 \equiv 1\ (mod\ 4)$
 	\subsection*{0.3.7}
+		As seen in the previous exercise, the addition of any two squares can only equal 0, 1, and 2.
 	\subsection*{0.3.8}
+		We can see right away the only way $a^2, b^2, c^2 \in \mathbb{Z}/4\mathbb{Z}$  can satisfy this is if $a^2 = b^2 = c^2 = 0$.  This means $a, b, c$ are all even.  We now see $a^2, b^2, c^2$ all have a factor of $2^2$ which implies there is a smaller solution available.
 	\subsection*{0.3.9}
+		This problem reduces to showing that the odd elements of $\mathbb{Z}/8\mathbb{Z}$ square to $\overline{1}$\\
+		$1*1 \equiv 1\ (mod\ 8); 3*3 \equiv 1\ (mod\ 8); 5*5 \equiv 1\ (mod\ 8); 7*7 \equiv 1\ (mod\ 8)$ 
 	\subsection*{0.3.10}
+		The elements in $(\mathbb{Z}/n\mathbb{Z})^*$ are all numbers with multiplicative inverses modulo n.  In order for $a^{-1}$ to exist, $(a, n) = 1$. By definition, $\varphi(n)$ is the number of relatively prime numbers less than $n$.  This will be hashed out in more detail in the following exercises!
 	\subsection*{0.3.11}
+		Take $a, b \in (\mathbb{Z}/n\mathbb{Z})^* \implies \exists a^{-1}, b^{-1}$ such that $a*b*b^{-1}*a^{-1} = a*1*a^{-1} =  a*a^{-1} = 1$\\
+		Thus $a*b \in (\mathbb{Z}/n\mathbb{Z})^*$ where $b^{-1}*a^{-1}$ is the inverse
 	\subsection*{0.3.12}
+		We can write $a = a_1*(a,n); n = n_1*(a, n); a*n_1 = a_1*n_1*(a, n) = a_1*n \equiv 0\ (mod\ n)$.  Now assume $\exists c\ s.t.\ ac \equiv 1\ (mod\ n) \implies \exists k\ s.t.\ kn = ac - 1$  Since $(a, n) | ac - kn\ \forall c, k \in \mathbb{Z}/n\mathbb{Z} \implies (a, n) | 1 \implies (a, n) = 1$.  However, we have taken $(a, n) > 1$ and a contradiction arises!
 	\subsection*{0.3.13}
+		From Euclid's algorithm, we have $ac + kn = (a, n) = 1$ for some $c, k \in \mathbb{Z}/n\mathbb{Z} \implies ac \equiv 1\ (mod\ n)$
 	\subsection*{0.3.14}
+		From 12 we see all relatively prime $a$ can't have a multiplicative inverse in $\mathbb{Z}$, and from 13 we see all relatively prime $a$ has an inverse than may be computed with Euclid's algorithm; thus we have $(\mathbb{Z}/n\mathbb{Z})^* = {a | (a, n) = 1}$  For a concrete example, we can provide elements that either send some $a$ to 0, or 1\\
+	$1*1 \equiv 1\ (mod\ 12); 2*6 \equiv 0\ (mod\ 12); 3*4 \equiv 0\ (mod\ 12); 5*5 \equiv 1\ (mod\ 12);\\ 7*7 \equiv 1\ (mod\ 12); 8*3 \equiv 0\ (mod\ 12); 9*4 \equiv 0\ (mod\ 12); 10*6 \equiv 0\ (mod\ 12); 11*11 \equiv 1\ (mod\ 12)$
 	\subsection*{0.3.15}
+		(a) $(13)^{-1} \equiv 17\ (mod\ 20)$\\
+		(b) $(69)^{-1} \equiv 40\ (mod\ 89)$ \\
+		(c) $(1891)^{-1} \equiv 253\ (mod\ 3797)$ \\
+		(d) $(6003722857)^{-1} \equiv 77695236753 \ (mod\ 77695236973)$ \\
 	\subsection*{0.3.16}
+		Haskell implementation\\
+		$reduceMod :: Integer -> Integer\\
+		reduceMod\ a\ n\ |\ (a < 0)\ =\ reduceMod\ (a + n)\ n\\
+		\indent \indent \indent \indent\ \ \ |\ (a > n -1)\ =\ reduceMod\ (a - n)\ n\\
+		\indent \indent \indent \indent\ \ \ |\ otherwise\ =\ a\\ \\
+		multiMod :: Integer -> Integer -> Integer -> Integer\\
+		multiMod\ a\ b\ n\ =\ reduceMod\ (a*b)\ n\\ \\ 
+		addMod :: Integer -> Integer -> Integer -> Integer\\
+		addMod\ a\ b\ n\ =\ reduceMod\ (a + b)\ n\\ \\
+		getInverse :: Integer -> Integer -> Maybe\ Integer\\
+		getInverse\ a\ n\ =\ relativePrime\  where \\
+		\indent \indent \indent \indent \indent \ \ \ relativePrime\ |\ (gcd\ ==\ 1)\ =\ Just\ (reduceMod\ inverse\ n)\\
+		\indent \indent \indent \indent \indent \indent \indent \indent \indent \indent |\ otherwise\ =\ Nothing\\
+		\indent \indent \indent \indent \indent \indent \indent \indent \indent \indent (gcd,\ inverse, \_)\ =\ linearGCD\ a\ n$
 
 \section*{Chapter 1}
 	
